@@ -15,6 +15,20 @@ interface coinsMarkets {
   market_cap: number;
 }
 
+const TextPercent = ({ percentage }: { percentage: number }) => {
+  const formatPercent = new Intl.NumberFormat('id-Id', {
+    style: 'percent',
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(percentage / 100);
+
+  return percentage > 0 ? (
+    <p className="text-green-500">{formatPercent}</p>
+  ) : (
+    <p className="text-red-500">{percentage}</p>
+  );
+};
+
 function App() {
   const [currPage, setCurrPage] = useState<number>(1);
 
@@ -70,8 +84,8 @@ function App() {
             ) : (
               <>
                 {coinsMarkets.data?.map((coin: coinsMarkets) => (
-                  <tr>
-                    <td className="flex items-center py-4" align="left">
+                  <tr className="hover:bg-slate-100">
+                    <td className="flex items-center py-4 px-1" align="left">
                       <img className="w-6 mr-2" src={coin.image} alt={coin.name} />
                       {coin.name}
                       <span className="p-1 ml-2 text-[.525rem] font-bold bg-slate-200 rounded">
@@ -79,7 +93,9 @@ function App() {
                       </span>
                     </td>
                     <td align="right">{formatter.format(coin.current_price)}</td>
-                    <td align="right">{coin.price_change_percentage_24h}</td>
+                    <td align="right">
+                      <TextPercent percentage={coin.price_change_percentage_24h} />
+                    </td>
                     <td align="right">{formatter.format(coin.total_volume)}</td>
                     <td align="right">{formatter.format(coin.market_cap)}</td>
                   </tr>
