@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://api.coingecko.com/api/v3/',
+  baseURL: import.meta.env.VITE_BASE_HOST,
   timeout: 3000,
   headers: {
     'Content-Type': 'application/json',

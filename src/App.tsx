@@ -25,7 +25,7 @@ const TextPercent = ({ percentage }: { percentage: number }) => {
   return percentage > 0 ? (
     <p className="text-green-500">{formatPercent}</p>
   ) : (
-    <p className="text-red-500">{percentage}</p>
+    <p className="text-red-500">{percentage}%</p>
   );
 };
 
@@ -84,7 +84,7 @@ function App() {
             ) : (
               <>
                 {coinsMarkets.data?.map((coin: coinsMarkets) => (
-                  <tr className="hover:bg-slate-100">
+                  <tr className="hover:bg-slate-100" key={coin.symbol}>
                     <td className="flex items-center py-4 px-1" align="left">
                       <img className="w-6 mr-2" src={coin.image} alt={coin.name} />
                       {coin.name}
